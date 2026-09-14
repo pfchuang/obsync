@@ -3,7 +3,7 @@ set -euo pipefail
 
 # ============================================================
 # Obsidian Self-hosted LiveSync 部署腳本
-# 在 Oracle Free Cloud VM 上部署 CouchDB + Cloudflare Tunnel
+# 在雲端 Linux VM 上部署 CouchDB + Cloudflare Tunnel
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -55,14 +55,15 @@ $COMPOSE up -d
 
 # ── 等 CouchDB 就緒 ──
 info "等待 CouchDB 啟動..."
+HEALTH_URL="http://${COUCHDB_USER}:${COUCHDB_PASSWORD}@127.0.0.1:5984/_up"
 for i in $(seq 1 30); do
-    if curl -sf http://127.0.0.1:5984/_up &>/dev/null; then
+    if curl -sf "${HEALTH_URL}" &>/dev/null; then
         info "CouchDB 已就緒"
         break
     fi
     sleep 2
 done
-curl -sf http://127.0.0.1:5984/_up &>/dev/null || error "CouchDB 啟動逾時"
+curl -sf "${HEALTH_URL}" &>/dev/null || error "CouchDB 啟動逾時（若為 401，請確認 .env 的 COUCHDB_USER/COUCHDB_PASSWORD 正確）"
 
 # ── Provisioning: 設定 CouchDB for LiveSync ──
 info "設定 CouchDB for Self-hosted LiveSync..."
@@ -121,7 +122,7 @@ info "  Username: ${COUCHDB_USER}"
 info "  Password: (你在 .env 設定的密碼)"
 info "  Database: ${DB_NAME}"
 echo ""
-info "測試連線: curl https://你的域名/_up"
+info "測試連線: curl https://${COUCHDB_USER}:你的密碼@你的域名/_up  (未帶帳密會回 401)"
 echo ""
 warn "記得在 Cloudflare Zero Trust → Tunnels → Public Hostname 設定："
 warn "  Subdomain: obsync (或你選的)"
