@@ -1,9 +1,9 @@
 # Obsidian Self-hosted LiveSync — CouchDB + Cloudflare Tunnel 部署腳本
-# 使用方式：scp 到 Oracle VM 後執行
+# 使用方式：scp 到雲端 VM 後執行
 # bash setup-obsync.sh
 
 ## 前置條件
-# 1. Oracle Free Cloud VM (Ubuntu 22.04+ 或 Oracle Linux)
+# 1. 雲端 Linux VM (Ubuntu 22.04+ 或其他主流發行版)
 # 2. Docker 已安裝 (或腳本會嘗試安裝)
 # 3. Cloudflare 帳號 + 域名 + Tunnel token
 
