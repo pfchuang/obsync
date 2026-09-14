@@ -9,9 +9,11 @@
 
 ## 設定這些變數再跑腳本：
 COUCHDB_USER="admin"
-COUCHDB_PASSWORD="CHANGE_ME_TO_A_STRONG_PASSWORD"
-COUCHDB_PORT=5984
-DOMAIN="obsync.yourdomain.com"      # 你的 Cloudflare 子域名
-CLOUDFLARE_TUNNEL_TOKEN=""          # 從 Cloudflare Zero Trust 取得
 
-## ============================================================
+COUCHDB_PASSWORD="CHANGE_ME_TO_A_STRONG_PASSWORD"
+
+COUCHDB_PORT=5984
+
+DOMAIN="obsync.yourdomain.com"      # 你的 Cloudflare 子域名
+
+CLOUDFLARE_TUNNEL_TOKEN=""          # 從 Cloudflare Zero Trust 取得
