@@ -1,5 +1,7 @@
 # Obsidian Self-hosted LiveSync — CouchDB + Cloudflare Tunnel 部署腳本
 ## 使用方式：git clone 到雲端 VM 後執行
+### cp .env.example .env
+### vi .env 設定變數
 ### bash setup-obsync.sh
 
 ## 前置條件
