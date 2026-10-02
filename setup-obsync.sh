@@ -21,6 +21,8 @@ if [[ ! -f .env ]]; then
 fi
 source .env
 
+[[ -z "${COUCHDB_DBNAME:-}" ]] && error "COUCHDB_DBNAME 未設定"
+[[ -z "${COUCHDB_USER:-}" ]] && error "COUCHDB_USER 未設定"
 [[ -z "${COUCHDB_PASSWORD:-}" ]] && error "COUCHDB_PASSWORD 未設定"
 [[ "${COUCHDB_PASSWORD}" == "CHANGE_ME_TO_A_STRONG_PASSWORD" ]] && error "請修改 COUCHDB_PASSWORD 為強密碼"
 [[ -z "${CLOUDFLARE_TUNNEL_TOKEN:-}" || "${CLOUDFLARE_TUNNEL_TOKEN}" == "your-tunnel-token-here" ]] && error "CLOUDFLARE_TUNNEL_TOKEN 未設定"
@@ -102,9 +104,8 @@ done
 info "CouchDB 設定完成 (${#SETTINGS[@]} 項)"
 
 # ── 建立 Obsidian 同步資料庫 ──
-DB_NAME="obsidiannotes"
-curl -sf -X PUT "${COUCH_URL}/${DB_NAME}" -o /dev/null || info "資料庫 ${DB_NAME} 已存在"
-info "資料庫 '${DB_NAME}' 就緒"
+curl -sf -X PUT "${COUCH_URL}/${COUCHDB_DBNAME}" -o /dev/null || info "資料庫 ${COUCHDB_DBNAME} 已存在"
+info "資料庫 '${COUCHDB_DBNAME}' 就緒"
 
 # ── 驗證 ──
 echo ""
@@ -120,7 +121,7 @@ info "在 Obsidian Self-hosted LiveSync 插件設定："
 info "  URI: https://你的域名"
 info "  Username: ${COUCHDB_USER}"
 info "  Password: (你在 .env 設定的密碼)"
-info "  Database: ${DB_NAME}"
+info "  Database: ${COUCHDB_DBNAME}"
 echo ""
 info "測試連線: curl https://${COUCHDB_USER}:你的密碼@你的域名/_up  (未帶帳密會回 401)"
 echo ""
