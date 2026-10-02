@@ -10,8 +10,10 @@
 ### 3. Cloudflare 帳號 + 域名 + Tunnel token
 
 ## 設定這些變數再跑腳本：
-COUCHDB_USER="admin"
+COUCHDB_DBNAME=obsidiannotes
 
-COUCHDB_PASSWORD="CHANGE_ME_TO_A_STRONG_PASSWORD"
+COUCHDB_USER=admin
 
-CLOUDFLARE_TUNNEL_TOKEN=""          # 從 Cloudflare Zero Trust 取得
+COUCHDB_PASSWORD=CHANGE_ME_TO_A_STRONG_PASSWORD
+
+CLOUDFLARE_TUNNEL_TOKEN=xxxx          # 從 Cloudflare Zero Trust 取得
