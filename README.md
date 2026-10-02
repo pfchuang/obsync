@@ -16,4 +16,4 @@ COUCHDB_USER=admin
 
 COUCHDB_PASSWORD=CHANGE_ME_TO_A_STRONG_PASSWORD
 
-CLOUDFLARE_TUNNEL_TOKEN=xxxx          # 從 Cloudflare Zero Trust 取得
+CLOUDFLARE_TUNNEL_TOKEN=your-tunnel-token-here         # 從 Cloudflare Zero Trust 取得
